@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Friction>
+  <Values u="0.34" v="4.8" />
+  <Values u="0.33" v="5.9" />
+  <Values u="0.3" v="6.8" />
+  <Values u="0.29" v="8.5" />
+  <Values u="0.285" v="9.55" />
+  <Values u="0.23" v="10.9" />
+  <Values u="0.279" v="11.45" />
+  <Values u="0.229" v="13.4" />
+  <Values u="0.3" v="14.2" />
+  <Values u="0.29" v="15.5" />
+  <Values u="0.185" v="15.9" />
+  <Values u="0.26" v="16.8" />
+  <Values u="0.21" v="17.8" />
+  <Values u="0.229" v="19.5" />
+  <Values u="0.24" v="20" />
+  <Values u="0.205" v="20.9" />
+  <Values u="0.19" v="21" />
+  <Values u="0.226" v="21.3" />
+  <Values u="0.2" v="22" />
+</Friction>
