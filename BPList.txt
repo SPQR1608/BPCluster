@@ -1,0 +1,7 @@
+1 A,B,C,E,C,E,C,F,E,C,G,I 
+2 A,B,F,C,E,C,E,C,G,I 
+3 A,C,D,F,E,C,D,E,C,D,E,C,D,E,C,D,G,I 
+4 A,C,D,E,C,D,F,E,C,D,G,I 
+5 A,D,C,E,D,C,F,E,D,C,G,H,D,C,E,D,C,F,E,D,C,G 
+6 A,D,F,C,E,D,C,G,H,D,C,E,D,C,E,D,C,G 
+7 A,D,C,E,D,C,F,E,D,C,E,D,C,G
