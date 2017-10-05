@@ -75,7 +75,7 @@ int get_line_count()
 	return count;
 }
 
-int read_file(char** cluster, int* strCount, int n)
+void read_file(char** cluster, int* strCount, int n)
 {
 	int j = 0;
 	char symbol;
@@ -110,8 +110,6 @@ int read_file(char** cluster, int* strCount, int n)
 		}
 	}
 	file.close();
-
-	return strlen(arr);
 }
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -139,7 +137,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (int i = 0; i < n; i++)
 		cluster[i] = new char[m];
 
-	int fg = read_file(cluster, strCount, n);
+	read_file(cluster, strCount, n);
 
 	for (int i = 0; i < n; i++)
 	{
@@ -149,7 +147,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 		cout << endl;
 	}
-	cout << fg << endl;
+	
 	/*
 	for (int i = 0; i < 4; i++){
 		for (int j = i; j < 4; j++){
