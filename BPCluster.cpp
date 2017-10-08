@@ -78,7 +78,7 @@ int get_line_count()
 void read_file(char** cluster, int* strCount, int n)
 {
 	int j = 0;
-	char symbol;
+	//char symbol;
 	char arr[255];
 
 	ifstream file;
@@ -112,6 +112,25 @@ void read_file(char** cluster, int* strCount, int n)
 	file.close();
 }
 
+void sort_cluster(char** cluster, int* strCount, int* sort_strCount, int n)
+{
+	int k = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		k = 0;
+		for (int j = 0; j < strCount[i]; j++)
+		{
+			if (isalpha(cluster[i][j]))
+			{
+				cluster[i][k] = cluster[i][j];
+				k++;
+			}	
+		}
+		sort_strCount[i] = k;
+	}
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	/*char* str1[] = { "Helo", "Welcome", "Home", "Dog"};
@@ -128,10 +147,12 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	char** cluster;
 	int* strCount;
+	int* sort_strCount;
 	const int n = get_line_count()+1;
 	const int m = 255;
-
+	
 	strCount = new int[n];
+	sort_strCount = new int[n];
 	cluster = new char*[n];
 	
 	for (int i = 0; i < n; i++)
@@ -139,9 +160,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	read_file(cluster, strCount, n);
 
+	sort_cluster(cluster, strCount, sort_strCount, n);
+
 	for (int i = 0; i < n; i++)
 	{
-		for (int j = 0; j < strCount[i]; j++)
+		for (int j = 0; j < sort_strCount[i]; j++)
 		{
 			cout << cluster[i][j];
 		}
@@ -155,6 +178,11 @@ int _tmain(int argc, _TCHAR* argv[])
 			cout << "The Levenshtein string distance between " << str1[i] << " and " << str2[j] << ": " << ld << endl;
 		}
 	}*/
+
+	for (int i = 0; i<n; i++)
+		delete cluster[i];
+	delete cluster;
+
 	system("Pause");
 	return 0;
 }
