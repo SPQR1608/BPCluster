@@ -11,6 +11,7 @@
 #include <cassert>
 #include <fstream>
 #include <ctype.h>
+#include <string.h>
 
 using namespace std;
 
@@ -31,23 +32,12 @@ size_t levenshtein_distance(const char* s, size_t n, const char* t, size_t m)
 			}
 			else
 			{
-				d[(i * n) + j] = min(d[(i - 1) * n + j] + 1, 
+				d[(i * n) + j] = min(d[(i - 1) * n + j] + 1,
 					min(d[i * n + (j - 1)] + 1,
-					d[(i - 1) * n + (j - 1)] + 1));
+					d[(i - 1) * n + (j - 1)] + 1)); 
 			}
 		}
 	}
-
-/*#ifdef DEBUG_PRINT
-	for (size_t i = 0; i < m; ++i)
-	{
-		for (size_t j = 0; j < n; ++j)
-		{
-			cout << d[(i * n) + j] << " ";
-		}
-		cout << endl;
-	}
-#endif*/
 
 	size_t r = d[n * m - 1];
 
@@ -78,7 +68,6 @@ int get_line_count()
 void read_file(char** cluster, int* strCount, int n)
 {
 	int j = 0;
-	//char symbol;
 	char arr[255];
 
 	ifstream file;
@@ -97,16 +86,6 @@ void read_file(char** cluster, int* strCount, int n)
 		for (int k = 0; k<strCount[i]; k++)
 		{
 			cluster[i][k] = arr[k];
-			/*file >> symbol;
-			if (symbol == '\n')
-				break;
-			else if (symbol == ',' || isdigit(symbol))
-				continue;
-			else
-			{
-				cluster[i][k] = symbol;
-				j++;
-			}*/
 		}
 	}
 	file.close();
@@ -131,29 +110,24 @@ void sort_cluster(char** cluster, int* strCount, int* sort_strCount, int n)
 	}
 }
 
+void printCL(char* str, int* count)
+{
+	for (int i = 0; i < count[i]; i++)
+		cout << str[i];
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
-	/*char* str1[] = { "Helo", "Welcome", "Home", "Dog"};
-	char* str2[] = {"Back", "Park", "Yellow", "Helo"};
-
-	vector <int> vecFirst;
-	for (int i = 0; i<10; ++i)
-	{
-		vecFirst.push_back(i); 
-	}
-	cout << "vecFirst contains: ";
-	for (int i = 0; i<vecFirst.size(); ++i)
-		cout << vecFirst[i] << ends;*/
-
-	char** cluster;
-	int* strCount;
-	int* sort_strCount;
-	const int n = get_line_count()+1;
+	const int n = get_line_count() + 1;
 	const int m = 255;
-	
-	strCount = new int[n];
-	sort_strCount = new int[n];
-	cluster = new char*[n];
+	int qwer, lvD = 0;
+	char** cluster = new char*[n];
+	int* strCount = new int[n];
+	int* sort_strCount = new int[n];
+	int* cluster_lvDist = new int[m];
+	//char* cluster_str2 = new char[m];
+	char elem_ofCluster[] = " ";
+	char sec_elem_ofCluster[] = " ";
 	
 	for (int i = 0; i < n; i++)
 		cluster[i] = new char[m];
@@ -162,23 +136,36 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	sort_cluster(cluster, strCount, sort_strCount, n);
 
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < sort_strCount[i]; j++)
-		{
-			cout << cluster[i][j];
+	for (int i = 0; i < n-1; i++){
+		for (int j = i + 1; j < n; j++){
+			qwer = 0;
+			cout << endl << "LV : ";
+			for (int z = 0; z < sort_strCount[i]; z++)
+				cout << cluster[i][z];
+			cout << " and ";
+			for (int z = 0; z < sort_strCount[j]; z++)
+				cout << cluster[j][z];
+			cout << " -- ";
+
+			for (int p = 0; p < sort_strCount[i]; p++){
+				*elem_ofCluster = cluster[i][p];
+				for (int l = 0; l < sort_strCount[j]; l++)
+				{
+					*sec_elem_ofCluster = cluster[j][l];
+					size_t ld = levenshtein_distance(elem_ofCluster, strlen(elem_ofCluster), sec_elem_ofCluster, strlen(sec_elem_ofCluster));
+					/*cout << "The Levenshtein string distance between " << elem_ofCluster << " and ";
+					cout << sec_elem_ofCluster;
+					cout << ": " << ld << endl;*/
+					if (ld == 0)
+						qwer++;
+				}
+			}
+			cluster_lvDist[lvD] = qwer;
+			cout << cluster_lvDist[lvD] << endl;
+			lvD++;
 		}
-		cout << endl;
 	}
 	
-	/*
-	for (int i = 0; i < 4; i++){
-		for (int j = i; j < 4; j++){
-			size_t ld = levenshtein_distance(str1[i], strlen(str1[i]), str2[j], strlen(str2[j]));
-			cout << "The Levenshtein string distance between " << str1[i] << " and " << str2[j] << ": " << ld << endl;
-		}
-	}*/
-
 	for (int i = 0; i<n; i++)
 		delete cluster[i];
 	delete cluster;
