@@ -1,6 +1,7 @@
 #include "Point.h"
 
 using namespace std;
+using namespace P;
 
 Point::Point()
 {

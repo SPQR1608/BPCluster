@@ -1,19 +1,25 @@
 // BPCluster.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <iostream>
 #include <string>
 #include "Point.h"
+#include "Kernel.h"
 #include "functions.h"
+#include "Cluster.h"
+#include <time.h>
+#include "MyForm.h"
+#include "BPCluster.h"
 
-using namespace std;
+using namespace P;
 
-int _tmain(int argc, _TCHAR* argv[])
+int BPCL()
 {
 	const int n = get_line_count() + 1;
 	const int m = 255;
 	int qwer, lvD = 0;
+	int kernelNumb = 0;
 	char** cluster = new char*[n];
 	int* strCount = new int[n];
 	int* sort_strCount = new int[n];
@@ -22,7 +28,15 @@ int _tmain(int argc, _TCHAR* argv[])
 	char sec_elem_ofCluster[] = " ";
 	string nameCL;
 
-	Point *point = new Point[n];
+	
+	Point* point = new Point[n];
+
+	cin >> kernelNumb;
+	Kernel* kernel = new Kernel[kernelNumb];
+
+	Cluster* clArray = new Cluster[kernelNumb];
+	
+	srand((unsigned int)time(NULL));
 	
 	for (int i = 0; i < n; i++)
 		cluster[i] = new char[m];
@@ -40,7 +54,7 @@ int _tmain(int argc, _TCHAR* argv[])
 				{
 					*sec_elem_ofCluster = cluster[j][l];
 					size_t ld = levenshtein_distance(elem_ofCluster, strlen(elem_ofCluster), sec_elem_ofCluster, strlen(sec_elem_ofCluster));
-					if (ld == 0)
+					if (ld == 1)
 						qwer++;
 				}
 			}
@@ -48,7 +62,6 @@ int _tmain(int argc, _TCHAR* argv[])
 			lvD++;
 		}
 	}
-	cout << endl;
 
 	for (int i = 0; i < n; i++)
 	{
@@ -58,6 +71,12 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	FindLocations(point, cluster_lvDist, n, lvD);
 
+	for (int i = 0; i < kernelNumb; i++)
+	{
+		kernel[i].SetKernel(random(0., 500.), random(0., 500.));
+	}
+
+	
 	for (int i = 0; i<n; i++)
 		delete cluster[i];
 	delete cluster;
@@ -65,7 +84,5 @@ int _tmain(int argc, _TCHAR* argv[])
 	delete sort_strCount;
 	delete cluster_lvDist;
 
-	system("Pause");
 	return 0;
 }
-

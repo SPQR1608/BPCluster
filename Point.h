@@ -2,20 +2,21 @@
 #include <string>
 
 using namespace std;
+namespace P {
+	class Point
+	{
+	public:
+		string name;
+		int x;
+		int y;
 
-class Point
-{
-public:
-	string name;
-	int x;
-	int y;
-	
-	Point();
+		Point();
 
-	void Point::SetPoints(string name, int x, int y);
+		void Point::SetPoints(string name, int x, int y);
 
-	~Point();
+		~Point();
 
-private:
+	private:
 
-};
+	};
+}
