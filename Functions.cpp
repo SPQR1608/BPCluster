@@ -19,7 +19,7 @@ using namespace P;
 
 
 /// <summary>
-/// Расчет расстояния Ливенштейна
+/// Calculation of the Livenstein distance
 /// </summary>
 size_t levenshtein_distance(const char* s, size_t n, const char* t, size_t m)
 {
@@ -53,7 +53,7 @@ size_t levenshtein_distance(const char* s, size_t n, const char* t, size_t m)
 }
 
 /// <summary>
-/// Расчет количества строк в файле TXT.
+/// Calculating the number of lines in a file TXT.
 /// </summary>
 int get_line_count()
 {
@@ -103,7 +103,7 @@ void read_file(char** cluster, int* strCount, int n)
 }
 
 /// <summary>
-/// Удаление лишних символов из строки
+/// Removing unnecessary characters from a string
 /// </summary>
 void sort_cluster(char** cluster, int* strCount, int* sort_strCount, int n)
 {
@@ -155,7 +155,7 @@ void sort_cluster(char** cluster, int* strCount, int* sort_strCount, int n)
 }
 
 /// <summary>
-/// Нахождение координат BP по расчитанным расстояниям Ливенштейна
+/// Finding the coordinates of BP along the calculated Livenstein distances
 /// </summary>
 void FindLocations(P::Point* point, int* distance, int n, int m)
 {
@@ -178,7 +178,7 @@ void FindLocations(P::Point* point, int* distance, int n, int m)
 }
 
 /// <summary>
-/// Расчет расстояния между BP
+/// Calculating the distance between BP
 /// </summary>
 int CalcDistance(int x, int y, int x1, int y1)
 {
@@ -191,7 +191,7 @@ double random(double min, double max)
 }
 
 /// <summary>
-/// Создание кластеров методом K-means
+/// Creating clusters by K-means
 /// </summary>
 int KMeans(P::Point* point, Kernel* kernel, int clusterNumb, int n, int* Connects)
 {
