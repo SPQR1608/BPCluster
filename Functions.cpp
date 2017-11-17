@@ -13,11 +13,14 @@
 #include "Cluster.h"
 #include "functions.h"
 #include "MyForm.h"
-//#include <glut.h>
 
 using namespace std;
 using namespace P;
 
+
+/// <summary>
+/// Расчет расстояния Ливенштейна
+/// </summary>
 size_t levenshtein_distance(const char* s, size_t n, const char* t, size_t m)
 {
 	++n; ++m;
@@ -49,13 +52,15 @@ size_t levenshtein_distance(const char* s, size_t n, const char* t, size_t m)
 	return r;
 }
 
+/// <summary>
+/// Расчет количества строк в файле TXT.
+/// </summary>
 int get_line_count()
 {
 	int count;
 	ifstream inp("BPList.txt");
 	if (!inp)
 		return 0;
-		//cout << "Error!" << endl;
 	else
 	{
 		count = 0;
@@ -69,6 +74,10 @@ int get_line_count()
 	return count;
 }
 
+
+/// <summary>
+/// Open the TXT file that contains the list of business process (BP).
+/// </summary>
 void read_file(char** cluster, int* strCount, int n)
 {
 	int j = 0;
@@ -93,6 +102,9 @@ void read_file(char** cluster, int* strCount, int n)
 	file.close();
 }
 
+/// <summary>
+/// Удаление лишних символов из строки
+/// </summary>
 void sort_cluster(char** cluster, int* strCount, int* sort_strCount, int n)
 {
 	int k = 0, s = 0;
@@ -142,9 +154,11 @@ void sort_cluster(char** cluster, int* strCount, int* sort_strCount, int n)
 	} */
 }
 
+/// <summary>
+/// Нахождение координат BP по расчитанным расстояниям Ливенштейна
+/// </summary>
 void FindLocations(P::Point* point, int* distance, int n, int m)
 {
-	//srand((unsigned int)time(NULL));
 	int i, j, p = 0;
 	point[0].x = rand() % 50 + 1;
 	point[0].y = rand() % 50 + 1;
@@ -157,14 +171,15 @@ void FindLocations(P::Point* point, int* distance, int n, int m)
 			{
 				point[j].x = rand() % 800 + 10;
 				point[j].y = rand() % 800 + 10;
-
 			} while ((distance[p]*2) != CalcDistance(point[i].x, point[i].y, point[j].x, point[j].y));
-
 			p++;		
 		}		
 	}
 }
 
+/// <summary>
+/// Расчет расстояния между BP
+/// </summary>
 int CalcDistance(int x, int y, int x1, int y1)
 {
 	return (int)sqrt(pow((x - x1), 2) + pow((y - y1), 2));
@@ -175,82 +190,9 @@ double random(double min, double max)
 	return (double)(rand()) / RAND_MAX*(max - min) + min;
 }
 
-/*void KMeans1(P::Point* point, Kernel* kernel, int clusterNumb, int n)
-{
-	bool flag = true;
-	double distance = 0, minDist = 0;
-	int** arrIndex = new int*[2];
-	int minIndex = 0, Index = 0;
-	int l = 0, p = 0;
-	for (int i = 0; i < 2; i++)
-		arrIndex[i] = new int[n];
-
-	while (flag)
-	{
-		if (l % 2 == 0)
-			Index = 0;
-		else
-			Index = 1;
-
-		for (int i = 0; i < n; i++)
-		{
-			minDist = 0;
-			minIndex = 0;
-			for (int j = 0; j < clusterNumb; j++)
-			{
-				distance = sqrt(pow((point[i].x - kernel[j].x), 2) + pow((point[i].y - kernel[j].y), 2));
-				if (j == 0)
-				{
-					minDist = distance;
-				}
-				else if (distance < minDist)
-				{
-					minDist = distance;
-					minIndex = j;
-				}
-			}
-			kernel[minIndex].x = abs((point[i].x - kernel[minIndex].x) / 2);
-			kernel[minIndex].y = abs((point[i].y - kernel[minIndex].y) / 2);
-		}
-		for (int i = 0; i < n; i++)
-		{
-			minDist = 0;
-			minIndex = 0;
-			for (int j = 0; j < clusterNumb; j++)
-			{
-				distance = sqrt(pow((point[i].x - kernel[j].x), 2) + pow((point[i].y - kernel[j].y), 2));
-				if (j == 0)
-				{
-					minDist = distance;
-				}
-				else if (distance < minDist)
-				{
-					minDist = distance;
-					minIndex = j;
-				}
-			}
-			arrIndex[Index][i] = minIndex;
-		}
-
-		p = 0;
-		if (l != 0)
-		{
-			for (int i = 0; i < n; i++)
-			{
-				if (arrIndex[0][i] == arrIndex[1][i])
-					p++;
-
-				if (p == n || l == 20)
-					flag = false;
-			}
-		}
-		l++;
-	}
-	for (int i = 0; i<2; i++)
-		delete arrIndex[i];
-	delete arrIndex;
-}*/
-
+/// <summary>
+/// Создание кластеров методом K-means
+/// </summary>
 int KMeans(P::Point* point, Kernel* kernel, int clusterNumb, int n, int* Connects)
 {
 	bool flag = true;
@@ -288,8 +230,6 @@ int KMeans(P::Point* point, Kernel* kernel, int clusterNumb, int n, int* Connect
 				}
 			}
 			arrMinIndex[i] = minIndex;
-			/*kernel[minIndex].x = abs((point[i].x - kernel[minIndex].x) / 2);
-			kernel[minIndex].y = abs((point[i].y - kernel[minIndex].y) / 2);*/
 		}
 		int z = 0;
 		int aver = 0;
@@ -314,8 +254,6 @@ int KMeans(P::Point* point, Kernel* kernel, int clusterNumb, int n, int* Connect
 			aver = aver / z;
 			for (int s = 0; s < z; s++)
 			{
-				/*kernel[i].x = abs((point[fArrIndex[s]].x - kernel[i].x) / 2);
-				kernel[i].y = abs((point[fArrIndex[s]].y - kernel[i].y) / 2);*/
 				do
 				{
 					kernel[i].x = rand() % 800 + 1;

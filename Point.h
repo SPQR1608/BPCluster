@@ -2,6 +2,10 @@
 #include <string>
 
 using namespace std;
+
+/// <summary>
+/// This class contains BP coordinats
+/// </summary>
 namespace P {
 	class Point
 	{

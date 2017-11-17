@@ -2,6 +2,9 @@
 
 using namespace std;
 
+/// <summary>
+/// This class contains cluster kernels
+/// </summary>
 class Kernel
 {
 public:

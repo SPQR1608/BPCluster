@@ -83,11 +83,13 @@ namespace BPCF {
 			// 
 			// button1
 			// 
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->button1->Location = System::Drawing::Point(627, 378);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(95, 23);
+			this->button1->Size = System::Drawing::Size(95, 31);
 			this->button1->TabIndex = 1;
-			this->button1->Text = L"Расчет";
+			this->button1->Text = L"Start";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
@@ -119,18 +121,22 @@ namespace BPCF {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(12, 492);
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(8, 492);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(153, 13);
+			this->label2->Size = System::Drawing::Size(255, 20);
 			this->label2->TabIndex = 6;
 			this->label2->Text = L"Количество циклов K-Means:";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(161, 492);
+			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(260, 492);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(10, 13);
+			this->label3->Size = System::Drawing::Size(13, 20);
 			this->label3->TabIndex = 7;
 			this->label3->Text = L".";
 			// 
@@ -138,7 +144,7 @@ namespace BPCF {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(762, 513);
+			this->ClientSize = System::Drawing::Size(762, 521);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->listBox1);
@@ -160,7 +166,6 @@ namespace BPCF {
 
 		kernelNumb = Convert::ToInt32(clusterNumb->Text);
 		BPCL(kernelNumb);
-		//label2->Text = Convert::ToString(BPCL(kernelNumb));
 	}
 	};
 }

@@ -56,7 +56,7 @@ void MyForm::DrawKernelK(Kernel* kernel, int kernelNumb)
 void MyForm::DrawConnects(P::Point* point, Kernel* kernel, int* Connects, int n)
 {
 	Graphics^ g = pictureBox1->CreateGraphics();
-	Pen^ bluePen = gcnew Pen(Color::Green, 1.0f);
+	Pen^ bluePen = gcnew Pen(Color::Green, 2.0f);
 	g->Clear(Color::White);
 	for (int i = 0; i < n; i++)
 	{
@@ -113,7 +113,7 @@ int MyForm::BPCL(int kernelNumb)
 				lvD++;
 			}
 		}
-
+		
 		for (int i = 0; i < n; i++)
 		{
 			nameCL = string(cluster[i], sizeof(char)*sort_strCount[i]);
@@ -142,10 +142,8 @@ int MyForm::BPCL(int kernelNumb)
 				kernel[i].SetKernel(point[n - (v + 1)].x + 50, point[n - (v + 1)].y + 50);
 				v++;
 			}
-			//kernel[i].SetKernel(random(10., 300.), random(10., 300.));
-		}
 
-		
+		}
 		for (int i = 0; i < kernelNumb; i++)
 		{
 			listBox1->Items->Add(kernel[i].x + " - " + kernel[i].y);
@@ -157,7 +155,7 @@ int MyForm::BPCL(int kernelNumb)
 		MyForm::Draw(point, n);
 		MyForm::DrawKernelK(kernel, kernelNumb);
 	
-		//MyForm::DrawKernel(kernel, kernelNumb);
+		//MessageBox::Show("OK", "Ошибка");
 		for (int i = 0; i < kernelNumb; i++)
 		{
 			listBox1->Items->Add(kernel[i].x + " - " + kernel[i].y);
